@@ -106,7 +106,11 @@
 				    }
 				 },
 				handleAmountChange: function(e) {
-    				this.setState({amount: parseFloat(e.target.value)});	        
+					var amount = 0;
+					if (e.target.value != ""){
+						amount = parseFloat(e.target.value);
+					}
+    				this.setState({amount: amount});	        
 			    },
 				handleDropdownChange: function(change) {
 					this.state.requestee = change.newValue;		        
@@ -125,6 +129,7 @@
         				contentType: "application/json; charset=utf-8",
 				    	dataType: "json"
 				    });
+				    this.setState({text: "$$$ Requested!"});
 				},
 			    render: function() {
 			        var self = this;
@@ -134,15 +139,17 @@
 						        <div className="loanSelect">
 						    		<Dropdown id='myDropdown'
 						    			options={this.state.users}
+						    			value={this.state.requestee}
 					          			onChange={this.handleDropdownChange}/>&nbsp;owes
 						        </div>
 						        <div className="loanAmount">
 							        $<input className="amountBox"
 							          type="text"
-							          value={this.state.amount}
+							          placeholder="0"
 							          onChange={this.handleAmountChange} />
 						        </div>
-						        <input type="submit" value="REQUEST $$$" />
+						        <input className="btn btn-success request-button" type="submit" value="REQUEST $$$" />
+						        <div className="confirmText">{this.state.text}</div> 
 					      </div>
 				        </form>
 			        );

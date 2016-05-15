@@ -16,7 +16,9 @@ html, body {
 
 .loan {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
 
 .loan > * {
   text-align: center;
@@ -24,9 +26,6 @@ html, body {
   justify-content: center;
   padding: 30px 10px 30px 10px;
   font-size: 40px; }
-
-.payback {
-  text-decoration: none; }
 
 .loanDesc { }
 
@@ -42,6 +41,7 @@ html, body {
   max-width: 30%;
 }
 
-.userBox {
-  max-width: 30%;
+.btn-success {
+  max-width: 75%;
+  padding: 20px;
 }
