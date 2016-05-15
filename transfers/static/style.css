@@ -1,0 +1,34 @@
+* {
+  padding: 0;
+  margin: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0; }
+
+#container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.loan {
+  display: flex;
+  flex-direction: column; }
+
+.loan > * {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 30px 10px 30px 10px;
+  font-size: 40px; }
+
+.payback {
+  text-decoration: none; }
+
+.loanDesc { }
+
+.loanAmount {
+  font-size: 80px; }

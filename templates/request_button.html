@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>InPersonStuff</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+	</head>
+	<body>
+		<div id="container"></div>
+		<script type="text/babel">
+			var Loan = React.createClass({
+			  getInitialState(){
+			    return {
+			      requester: {{ loan.requester }},
+			      requestee: {{ loan.requestee }},
+			      amount: {{ loan.amount }},
+			      link: {{ loan.uber_link  }}
+			    };
+			  },
+			  render(){
+			    return (
+			      <div className="loan">
+			        <div className="loanDesc">
+			          @{this.state.requestee}&nbsp;owes&nbsp;@{this.state.requester}
+			         </div>
+			        <div className="loanAmount">${this.state.amount}</div>
+			      <a href={this.state.link} className="payback">PAY THEM BACK</a></div>
+			    )
+			  }
+			})
+
+			ReactDOM.render(
+			  <Loan />,
+			  document.getElementById('container')
+			);
+		</script>
+	</body>
+</html>
