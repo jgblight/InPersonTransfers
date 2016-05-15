@@ -1,0 +1,21 @@
+{
+  "name": "inutile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "./node_modules/node-sass/bin/node-sass style.scss style.css",
+    "build:markup": "pug index.pug"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2"
+  },
+  "devDependencies": {
+    "node-sass": "^3.7.0",
+    "pug": "^2.0.0-alpha7"
+  }
+}
