@@ -20,7 +20,9 @@
 			      requester: "{{ loan.requester }}",
 			      requestee: "{{ loan.requestee }}",
 			      amount: {{ loan.amount }},
+			      {% autoescape off %}
 			      link: "{{ loan.uber_link  }}"
+			      {% endautoescape %}
 			    };
 			  },
 			  render(){
