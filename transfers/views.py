@@ -17,6 +17,8 @@ from transfers.models import TwitterProfile, PaymentRequest
 
 from twython import Twython
 
+import json
+
 
 def main(request):
     if request.user.is_authenticated():
