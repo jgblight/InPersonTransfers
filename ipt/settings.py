@@ -131,6 +131,8 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 TWITTER_KEY = os.environ['TWITTER_KEY']
 TWITTER_SECRET = os.environ['TWITTER_SECRET']
 
