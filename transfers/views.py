@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from transfers.models import TwitterProfile, PaymentRequest
 
 from twython import Twython
 
