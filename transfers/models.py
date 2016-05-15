@@ -23,7 +23,7 @@ class PaymentRequest(models.Model):
     amount = models.FloatField()
     latitude = models.FloatField()
     longitude = models.FloatField()
-    paid = models.BooleanField()
+    paid = models.BooleanField(default=False)
 
     @property
     def uber_link(self):
