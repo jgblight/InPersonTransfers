@@ -24,7 +24,7 @@ def main(request):
     if request.user.is_authenticated():
         return render(request, 'make_request.html')
     else:
-        return HttpResponse("<a href='/login'>Log in with Twitter</a>")
+        return render(request, 'login.html')
 
 
 def logout(request, redirect_url=settings.LOGOUT_REDIRECT_URL):
