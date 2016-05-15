@@ -1,1 +1,1 @@
-web: gunicorn ipt/ipt.wsgi --log-file -
+web: gunicorn ipt.ipt.wsgi --log-file -
