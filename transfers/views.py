@@ -96,6 +96,8 @@ def thanks(request, redirect_url=None):
     return HttpResponseRedirect(redirect_url or settings.LOGIN_REDIRECT_URL)
 
 
+
+
 class PaymentRequestViewSet(viewsets.ViewSet):
 
     #authentication_classes = (SessionAuthentication,)
@@ -116,8 +118,7 @@ class PaymentRequestViewSet(viewsets.ViewSet):
     def create(self, request):
         """ POST request to http://inpersontransfers.herokuapp.com/requests/
             sample data:
-                {"requester":"jenblight",
-                 "requestee":"twitterhandle",
+                {"requestee":"twitterhandle",
                  "amount":12,
                  "latitude":37.7607947,
                  "longitude":-122.4206304,17}
@@ -126,5 +127,7 @@ class PaymentRequestViewSet(viewsets.ViewSet):
         data = request.data
         if '_content' in data:
             data = json.loads(data['_content'])
+        if 'requester' not in data:
+            data['requester'] = request.user.username
         pr = PaymentRequest.from_json(**data)
         return Response(pr.to_json())

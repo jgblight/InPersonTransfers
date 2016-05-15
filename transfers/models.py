@@ -33,8 +33,8 @@ class PaymentRequest(models.Model):
 
     def to_json(self):
         return json.dumps({
-            "requester": "@{}".format(self.requester.username),
-            "requestee": "@{}".format(self.requester.username),
+            "requester": self.requester.username,
+            "requestee": self.requestee.username,
             "amount": self.amount,
             "latitude": self.latitude,
             "longitude": self.longitude,
