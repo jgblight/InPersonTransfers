@@ -1,0 +1,8 @@
+{
+  "name": "In Person Transfers",
+  "description": "A barebones Python app, which can easily be deployed to Heroku.",
+  "image": "heroku/python",
+  "repository": "https://github.com/jgblight/InPersonTransfers",
+  "keywords": ["python", "django" ],
+  "addons": [ "heroku-postgresql" ]
+}
