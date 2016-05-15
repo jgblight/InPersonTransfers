@@ -108,6 +108,12 @@ class UnsafeSessionAuthentication(SessionAuthentication):
         return (user, None)
 
 
+class UserSearchView(APIView):
+
+    def get(self, request):
+        usernames = User.objects.all().values_list('username', flat=True)
+        return Response(usernames)
+
 class PaymentRequestViewSet(viewsets.ViewSet):
 
     authentication_classes = (UnsafeSessionAuthentication,)

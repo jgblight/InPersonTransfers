@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^login/?$', views.begin_auth, name="twitter_login"),
     url(r'^logout/?$', views.logout, name="twitter_logout"),
     url(r'^thanks/?$', views.thanks, name="twitter_callback"),
+    url(r'^users/?$', views.UserSearchView.as_view(), name="user_search")
 ]
 
 router = DefaultRouter()
