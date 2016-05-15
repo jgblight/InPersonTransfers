@@ -43,8 +43,19 @@ class PaymentRequest(models.Model):
             "uber_link": self.uber_link
         })
 
+    def send_tweet(self):
+        request_url = "http://inpersontransfers.herokuapp.com/requests/{}/".format(self.id)
+        twitter = Twython(
+            settings.TWITTER_KEY,
+            settings.TWITTER_SECRET,
+            self.requester.twitterprofile.oauth_token,
+            self.requester.twitterprofile.oauth_secret)
+        twitter.update_status(".@{}, you owe me ${}. Pay me back at {}".format(self.requestee.username, self.amount, request_url))
+
     @classmethod
     def from_json(self, **data):
         data['requester'] = User.objects.get(username=data["requester"])
         data['requestee'] = User.objects.get(username=data["requestee"])
-        return PaymentRequest.objects.create(**data)
+        pr = PaymentRequest.objects.create(**data)
+        pr.send_tweet()
+        return pr
