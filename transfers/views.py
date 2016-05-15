@@ -96,12 +96,22 @@ def thanks(request, redirect_url=None):
     return HttpResponseRedirect(redirect_url or settings.LOGIN_REDIRECT_URL)
 
 
+class UnsafeSessionAuthentication(SessionAuthentication):
+
+    def authenticate(self, request):
+        http_request = request._request
+        user = getattr(http_request, 'user', None)
+
+        if not user or not user.is_active:
+           return None
+
+        return (user, None)
 
 
 class PaymentRequestViewSet(viewsets.ViewSet):
 
-    #authentication_classes = (SessionAuthentication,)
-    #permission_classes = (IsAuthenticated,)
+    authentication_classes = (UnsafeSessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
     def retrieve(self, request, pk=None):
         """ POST request to http://inpersontransfers.herokuapp.com/requests/{id}/
