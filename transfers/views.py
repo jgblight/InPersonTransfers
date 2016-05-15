@@ -11,9 +11,9 @@ from twython import Twython
 
 def main(request):
     if request.user.is_authenticated():
-        return "You are logged in"
+        return HttpResponse("You are logged in")
     else:
-        return "<a href='/login'>Log in with Twitter</a>"
+        return HttpResponse("<a href='/login'>Log in with Twitter</a>")
 
 
 def logout(request, redirect_url=settings.LOGOUT_REDIRECT_URL):
