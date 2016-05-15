@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>InPersonTransfers</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+	</head>
+	<body>
+		<div id="container"></div>
+		<script type="text/babel">
+			var Dropdown = React.createClass({
+			    propTypes: {
+			        id: React.PropTypes.string.isRequired,
+        			options: React.PropTypes.array.isRequired,
+			        value: React.PropTypes.string,
+			        onChange: React.PropTypes.func
+			    },
+			    getDefaultProps: function() {
+			        return {
+			            value: null,
+			            onChange: null
+			        };
+			    },
+			    getInitialState: function() {
+			        return {
+			            selected: null,
+			            options: []
+			        };
+			    },
+				componentWillReceiveProps: function(nextProps) {
+			        var selected = this.getSelectedFromProps(nextProps);
+			        this.setState({
+			           selected: selected
+			        });
+			    },
+			    getSelectedFromProps(props) {
+			        var selected;
+			        if (props.value === null && props.options.length !== 0) {
+			            selected = props.options[0];
+			        } else {
+			            selected = props.value;
+			        }
+			        return selected;
+			    },
+			    render: function() {
+			        var self = this;
+			        var options = self.props.options.map(function(option) {
+			            return (
+			                <option key={option} value={option}>
+			                    {option}
+			                </option>
+			            );
+			        });
+			        return (
+			            <select id={self.props.id} 
+			                    className='userBox' 
+			                    value={self.state.selected} 
+			                    onChange={self.handleChange}>
+			                {options}
+			            </select>
+			        );
+			    },
+			    handleChange: function(e) {
+			        if (this.props.onChange) {
+			            var change = {
+			              oldValue: this.state.selected,
+			              newValue: e.target.value
+			            };
+			            this.props.onChange(change);
+			        }
+			        this.setState({selected: e.target.value});
+			    }
+			});
+
+			var LoanForm = React.createClass({
+				getInitialState: function() {
+			        return {
+			            requestee: null,
+			            amount: 0,
+			            latitude: 0,
+			            longitude: 0,
+			            users: []
+			        };
+			    },
+			    componentWillMount: function() {
+			    	var self = this;
+				  	$.get("/users/").then(function(data){
+				  		self.setState({
+					      users: data,
+					      requestee: data[0]
+					    });
+				  	});
+				  	if (navigator.geolocation) {
+				        navigator.geolocation.getCurrentPosition(function(position){
+				        	self.setState({
+						      latitude: position.coords.latitude,
+						      longitude: position.coords.longitude
+						    });
+				        });
+				    }
+				 },
+				handleAmountChange: function(e) {
+    				this.setState({amount: parseFloat(e.target.value)});	        
+			    },
+				handleDropdownChange: function(change) {
+					this.state.requestee = change.newValue;		        
+			    },
+				handleSubmit: function(e) {
+				    e.preventDefault();
+				    var data = JSON.stringify({
+				    	"requestee": this.state.requestee,
+				    	"amount": this.state.amount,
+				    	"latitude": this.state.latitude,
+				    	"longitude": this.state.longitude
+				    });
+				    $.post({
+				    	url: "/requests/",
+				    	data: data,
+        				contentType: "application/json; charset=utf-8",
+				    	dataType: "json"
+				    });
+				},
+			    render: function() {
+			        var self = this;
+			        return (			     
+			            <form onSubmit={this.handleSubmit}>
+				          <div className="loan">
+						        <div className="loanSelect">
+						    		<Dropdown id='myDropdown'
+						    			options={this.state.users}
+					          			onChange={this.handleDropdownChange}/>&nbsp;owes
+						        </div>
+						        <div className="loanAmount">
+							        $<input className="amountBox"
+							          type="text"
+							          value={this.state.amount}
+							          onChange={this.handleAmountChange} />
+						        </div>
+						        <input type="submit" value="REQUEST $$$" />
+					      </div>
+				        </form>
+			        );
+		    	},
+			});
+
+
+			ReactDOM.render(
+			    <LoanForm />,
+			document.getElementById('container')
+			);
+		</script>
+	</body>
+</html>
