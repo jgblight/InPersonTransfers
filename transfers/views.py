@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework import viewsets
 from rest_framework.views import APIView
@@ -101,5 +102,6 @@ class PaymentRequestViewSet(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
         return Response(PaymentRequest.objects.get(id=pk).to_json)
 
+    @csrf_exempt
     def create(self, request):
         return Response(PaymentRequest.from_json(**request.data))
