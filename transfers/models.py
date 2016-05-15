@@ -37,7 +37,7 @@ class PaymentRequest(models.Model):
         #geolocator = Nominatim()
         #location = geolocator.reverse("{}, {}".format(self.latitude, self.longitude))
         #formatted_address = quote_plus(location.address)
-        return "uber://?client_id=RXjda_RLc1B5KhzoOB9nDnkaGJOkJAmv&action=setPickup&pickup=my_location&dropoff[latitude]={}&dropoff[longitude]={}&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d".format(self.latitude, self.longitude)
+        return "uber://?client_id=RXjda_RLc1B5KhzoOB9nDnkaGJOkJAmv&action=setPickup&pickup=my_location&dropoff[latitude]={}&dropoff[longitude]={}&dropoff[nickname]=Your%20Friend&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d".format(self.latitude, self.longitude)
 
     def to_json(self):
         return {
