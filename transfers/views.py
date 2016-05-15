@@ -102,9 +102,27 @@ class PaymentRequestViewSet(viewsets.ViewSet):
     #permission_classes = (IsAuthenticated,)
 
     def retrieve(self, request, pk=None):
+        """ POST request to http://inpersontransfers.herokuapp.com/requests/{id}/
+            sample data:
+                {"requester":"jenblight",
+                 "requestee":"twitterhandle",
+                 "amount":12,
+                 "latitude":37.7607947,
+                 "longitude":-122.4206304,17,
+                 "uber_link":"uber://action=setPickup&..."}
+        """
         return Response(PaymentRequest.objects.get(id=pk).to_json())
 
     def create(self, request):
+        """ POST request to http://inpersontransfers.herokuapp.com/requests/
+            sample data:
+                {"requester":"jenblight",
+                 "requestee":"twitterhandle",
+                 "amount":12,
+                 "latitude":37.7607947,
+                 "longitude":-122.4206304,17}
+        """
+
         data = request.data
         if '_content' in data:
             data = json.loads(data['_content'])
