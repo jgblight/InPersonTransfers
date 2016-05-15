@@ -18,4 +18,8 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^/?$', views.main, name=""),
+    url(r'^login/?$', views.begin_auth, name="twitter_login"),
+    url(r'^logout/?$', views.logout, name="twitter_logout"),
+    url(r'^thanks/?$', views.thanks, name="twitter_callback"),
 ]

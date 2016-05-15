@@ -8,7 +8,12 @@ from django.contrib.auth.models import User
 
 from twython import Twython
 
-User = get_user_model()
+
+def main(request):
+    if request.user.is_authenticated():
+        return "You are logged in"
+    else:
+        return "<a href='/login'>Log in with Twitter</a>"
 
 
 def logout(request, redirect_url=settings.LOGOUT_REDIRECT_URL):
