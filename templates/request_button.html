@@ -17,10 +17,10 @@
 			var Loan = React.createClass({
 			  getInitialState(){
 			    return {
-			      requester: {{ loan.requester }},
-			      requestee: {{ loan.requestee }},
+			      requester: "{{ loan.requester }}",
+			      requestee: "{{ loan.requestee }}",
 			      amount: {{ loan.amount }},
-			      link: {{ loan.uber_link  }}
+			      link: "{{ loan.uber_link  }}"
 			    };
 			  },
 			  render(){
