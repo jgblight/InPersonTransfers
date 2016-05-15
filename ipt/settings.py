@@ -138,3 +138,10 @@ LOGIN_URL = '/your_url_extension/login'
 LOGOUT_URL = '/your_url_extension/logout'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+REST_FRAMEWORK = {
+    # other settings...
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [],
+}

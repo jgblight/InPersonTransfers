@@ -99,10 +99,6 @@ class PaymentRequestViewSet(viewsets.ViewSet):
     #authentication_classes = (SessionAuthentication,)
     #permission_classes = (IsAuthenticated,)
 
-    @csrf_exempt
-    def dispatch(self, *args, **kwargs):
-        return super(PaymentRequestViewSet, self).dispatch(*args, **kwargs)
-
     def retrieve(self, request, pk=None):
         return Response(PaymentRequest.objects.get(id=pk).to_json)
 
