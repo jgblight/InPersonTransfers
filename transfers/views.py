@@ -102,7 +102,8 @@ class PaymentRequestViewSet(viewsets.ViewSet):
     #permission_classes = (IsAuthenticated,)
 
     def retrieve(self, request, pk=None):
-        return Response(PaymentRequest.objects.get(id=pk).to_json)
+        return Response(PaymentRequest.objects.get(id=pk).to_json())
 
     def create(self, request):
-        return Response(PaymentRequest.from_json(**json.loads(request.data['_content'])))
+        pr = PaymentRequest.from_json(**json.loads(request.data['_content']))
+        return Response(pr.to_json())
