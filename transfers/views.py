@@ -103,5 +103,5 @@ class PaymentRequestViewSet(viewsets.ViewSet):
         return Response(PaymentRequest.objects.get(id=pk).to_json)
 
     def create(self, request):
-        data = request.json
+        data = request.body
         return Response(PaymentRequest.from_json(**request.data))
