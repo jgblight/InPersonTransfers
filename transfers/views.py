@@ -141,7 +141,7 @@ class PaymentRequestViewSet(viewsets.ViewSet):
                 {"requestee":"twitterhandle",
                  "amount":12,
                  "latitude":37.7607947,
-                 "longitude":-122.4206304,17}
+                 "longitude":-122.4206304}
         """
 
         data = request.data
