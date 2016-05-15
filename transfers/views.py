@@ -83,4 +83,4 @@ def thanks(request, redirect_url=settings.LOGIN_REDIRECT_URL):
     login(request, user)
     redirect_url = request.session.get('next_url', redirect_url)
 
-    HttpResponseRedirect(redirect_url)
+    return HttpResponseRedirect(redirect_url)
