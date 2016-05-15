@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout as django_logout
 from django.contrib.auth import get_user_model
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.conf import settings
 from django.core.urlresolvers import reverse
