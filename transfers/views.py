@@ -22,7 +22,7 @@ import json
 
 def main(request):
     if request.user.is_authenticated():
-        return HttpResponse("You are logged in")
+        return render(request, 'make_request.html')
     else:
         return HttpResponse("<a href='/login'>Log in with Twitter</a>")
 

@@ -34,9 +34,9 @@ class PaymentRequest(models.Model):
 
     @property
     def uber_link(self):
-        geolocator = Nominatim()
-        location = geolocator.reverse("{}, {}".format(self.latitude, self.longitude))
-        formatted_address = quote_plus(location.address)
+        #geolocator = Nominatim()
+        #location = geolocator.reverse("{}, {}".format(self.latitude, self.longitude))
+        #formatted_address = quote_plus(location.address)
         #return "uber://action=setPickup&client_id=RXjda_RLc1B5KhzoOB9nDnkaGJOkJAmv&pickup=my_location&dropoff[latitude]={}&dropoff[longitude]={}&dropoff[formatted_address]={}&dropoff[nickname]=Your%20Friend&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d".format(self.latitude, self.longitude, formatted_address)
         return "uber://action=setPickup&client_id=RXjda_RLc1B5KhzoOB9nDnkaGJOkJAmv&pickup[latitude]=37.775818&pickup[longitude]=-122.418028&dropoff[latitude]=37.802374&dropoff[longitude]=-122.405818&dropoff[nickname]=Coit%20Tower&dropoff[formatted_address]=1%20Telegraph%20Hill%20Blvd%2C%20San%20Francisco%2C%20CA%2094133&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d"
 
@@ -54,7 +54,7 @@ class PaymentRequest(models.Model):
         }
 
     def send_tweet(self):
-        request_url = "http://inpersontransfers.herokuapp.com/requests/{}/".format(self.id)
+        request_url = "http://inpersontransfers.herokuapp.com/r/{}/".format(self.id)
         twitter = Twython(
             settings.TWITTER_KEY,
             settings.TWITTER_SECRET,

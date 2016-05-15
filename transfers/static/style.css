@@ -32,3 +32,16 @@ html, body {
 
 .loanAmount {
   font-size: 80px; }
+
+.loanSelect {
+  align-items: center;
+  justify-content: center;
+}
+
+.amountBox {
+  max-width: 30%;
+}
+
+.userBox {
+  max-width: 30%;
+}
