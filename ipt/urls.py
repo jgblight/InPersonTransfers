@@ -17,6 +17,8 @@ from django.conf.urls import url
 from django.contrib import admin
 from transfers import views
 
+from rest_framework.routers import DefaultRouter
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^/?$', views.main, name=""),
@@ -24,3 +26,8 @@ urlpatterns = [
     url(r'^logout/?$', views.logout, name="twitter_logout"),
     url(r'^thanks/?$', views.thanks, name="twitter_callback"),
 ]
+
+router = DefaultRouter()
+router.register(r'requests', views.PaymentRequestViewSet, base_name="payment_requests")
+
+urlpatterns += router.urls

@@ -24,3 +24,25 @@ class PaymentRequest(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     paid = models.BooleanField()
+
+    @property
+    def uber_link(self):
+        return "uber://action=setPickup"
+
+    def to_json(self):
+        return json.dumps({
+            "requester": "@{}".format(self.requester.username),
+            "requestee": "@{}".format(self.requester.username),
+            "amount": self.amount,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "paid": self.paid,
+            "uber_link": self.uber_link
+        })
+
+    @classmethod
+    def from_json(self, json_data):
+        data = json.loads(json_data)
+        data['requester'] = User.objects.get(username=data["requester"])
+        data['requestee'] = User.objects.get(username=data["requestee"])
+        return PaymentRequest.objects.create(**data)        

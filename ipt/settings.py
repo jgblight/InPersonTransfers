@@ -133,7 +133,7 @@ STATICFILES_DIRS = (
 TWITTER_KEY = os.environ['TWITTER_KEY']
 TWITTER_SECRET = os.environ['TWITTER_SECRET']
 
-LOGIN_URL='/your_url_extension/login'
-LOGOUT_URL='/your_url_extension/logout'
-LOGIN_REDIRECT_URL='/'
-LOGOUT_REDIRECT_URL='/'
+LOGIN_URL = '/your_url_extension/login'
+LOGOUT_URL = '/your_url_extension/logout'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

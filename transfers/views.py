@@ -5,6 +5,12 @@ from django.shortcuts import render_to_response
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+
+from rest_framework.views import APIView
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
 from transfers.models import TwitterProfile, PaymentRequest
 
 from twython import Twython
@@ -46,7 +52,7 @@ def begin_auth(request):
     return HttpResponseRedirect(auth_props['auth_url'])
 
 
-def thanks(request, redirect_url=settings.LOGIN_REDIRECT_URL):
+def thanks(request, redirect_url=None):
     """A user gets redirected here after hitting Twitter and authorizing your app to use their data.
     This is the view that stores the tokens you want
     for querying data. Pay attention to this.
@@ -83,4 +89,16 @@ def thanks(request, redirect_url=settings.LOGIN_REDIRECT_URL):
     login(request, user)
     redirect_url = request.session.get('next_url', redirect_url)
 
-    return HttpResponseRedirect(redirect_url)
+    return HttpResponseRedirect(redirect_url or settings.LOGIN_REDIRECT_URL)
+
+
+class PaymentRequestViewSet(viewsets.ViewSet):
+
+    #authentication_classes = (SessionAuthentication,)
+    #permission_classes = (IsAuthenticated,)
+
+    def retrieve(self, request, pk=None):
+        return Response(PaymentRequest.objects.get(id=pk).to_json)
+
+    def create(self, request):
+        return Response(PaymentRequest.from_json(**request.data))
