@@ -105,5 +105,8 @@ class PaymentRequestViewSet(viewsets.ViewSet):
         return Response(PaymentRequest.objects.get(id=pk).to_json())
 
     def create(self, request):
-        pr = PaymentRequest.from_json(**json.loads(request.data['_content']))
+        data = request.data
+        if '_content' in data:
+            data = json.loads(data['_content'])
+        pr = PaymentRequest.from_json(**data)
         return Response(pr.to_json())
