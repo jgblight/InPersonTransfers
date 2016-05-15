@@ -52,7 +52,8 @@ class PaymentRequest(models.Model):
             settings.TWITTER_SECRET,
             self.requester.twitterprofile.oauth_token,
             self.requester.twitterprofile.oauth_secret)
-        twitter.update_status(".@{}, you owe me ${}. Pay me back at {}".format(self.requestee.username, self.amount, request_url))
+        status = ".@{}, you owe me ${}. Pay me back at {}".format(self.requestee.username, self.amount, request_url)
+        twitter.update_status(status=status)
 
     @classmethod
     def from_json(self, **data):
