@@ -114,7 +114,7 @@ class PaymentRequestViewSet(viewsets.ViewSet):
     permission_classes = (IsAuthenticated,)
 
     def retrieve(self, request, pk=None):
-        """ POST request to http://inpersontransfers.herokuapp.com/requests/{id}/
+        """ GET request to http://inpersontransfers.herokuapp.com/requests/{id}/
             sample data:
                 {"requester":"jenblight",
                  "requestee":"twitterhandle",
