@@ -29,7 +29,7 @@ class PaymentRequest(models.Model):
 
     @property
     def uber_link(self):
-        return "uber://action=setPickup"
+        return "uber://action=setPickup&client_id=RXjda_RLc1B5KhzoOB9nDnkaGJOkJAmv&dropoff[latitude]={}[longitude]={}&dropoff[nickname]=Your%20Friend".format(self.latitude, self.longitude)
 
     def to_json(self):
         return json.dumps({
