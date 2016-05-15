@@ -43,7 +43,7 @@ class PaymentRequest(models.Model):
         })
 
     @classmethod
-    def from_json(self, **data):
+    def from_json(self, **json_data):
         data = json.loads(json_data)
         data['requester'] = User.objects.get(username=data["requester"])
         data['requestee'] = User.objects.get(username=data["requestee"])
