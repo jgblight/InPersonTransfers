@@ -32,7 +32,7 @@ class PaymentRequest(models.Model):
         return "uber://action=setPickup&client_id=RXjda_RLc1B5KhzoOB9nDnkaGJOkJAmv&dropoff[latitude]={}[longitude]={}&dropoff[nickname]=Your%20Friend&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d".format(self.latitude, self.longitude)
 
     def to_json(self):
-        return json.dumps({
+        return {
             "id": self.id,
             "requester": self.requester.username,
             "requestee": self.requestee.username,
@@ -41,7 +41,7 @@ class PaymentRequest(models.Model):
             "longitude": self.longitude,
             "paid": self.paid,
             "uber_link": self.uber_link
-        })
+        }
 
     def send_tweet(self):
         request_url = "http://inpersontransfers.herokuapp.com/requests/{}/".format(self.id)
