@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.utils.http import urlencode
+from django.utils.http import quote_plus
 
 from geopy.geocoders import Nominatim
 
@@ -36,7 +36,7 @@ class PaymentRequest(models.Model):
     def uber_link(self):
         geolocator = Nominatim()
         location = geolocator.reverse("{}, {}".format(self.latitude, self.longitude))
-        formatted_address = urlencode(location.address)
+        formatted_address = quote_plus(location.address)
         return "uber://action=setPickup&client_id=RXjda_RLc1B5KhzoOB9nDnkaGJOkJAmv&dropoff[latitude]={}&dropoff[longitude]={}&dropoff[formatted_address]={}&dropoff[nickname]=Your%20Friend&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d".format(self.latitude, self.longitude, formatted_address)
 
     def to_json(self):
