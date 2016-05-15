@@ -99,7 +99,7 @@ class PaymentRequestViewSet(viewsets.ViewSet):
     #authentication_classes = (SessionAuthentication,)
     #permission_classes = (IsAuthenticated,)
 
-    @method_decorator(csrf_exempt)
+    @csrf_exempt
     def dispatch(self, *args, **kwargs):
         return super(PaymentRequestViewSet, self).dispatch(*args, **kwargs)
 
