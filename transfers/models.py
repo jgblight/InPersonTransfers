@@ -32,7 +32,7 @@ class PaymentRequest(models.Model):
         return "uber://action=setPickup"
 
     def to_json(self):
-        return json.loads({
+        return json.dumps({
             "requester": "@{}".format(self.requester.username),
             "requestee": "@{}".format(self.requester.username),
             "amount": self.amount,
