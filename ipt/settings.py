@@ -25,8 +25,6 @@ SECRET_KEY = 'cf5zgw*gimk=jgjzw1%t&$dbifce^fy3!11jsz+iu0@@!bzp$!'
 
 ALLOWED_HOSTS = []
 
-SECURE_SSL_REDIRECT = True
-
 
 # Application definition
 
