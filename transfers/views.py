@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout as django_logout
 from django.contrib.auth import get_user_model
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
@@ -96,6 +96,11 @@ def thanks(request, redirect_url=None):
     return HttpResponseRedirect(redirect_url or settings.LOGIN_REDIRECT_URL)
 
 
+def request_button(request, id=None):
+    pr = PaymentRequest.objects.get(id=id)
+    return render(request, 'request_button.html', context={'loan':pr})
+
+
 class UnsafeSessionAuthentication(SessionAuthentication):
 
     def authenticate(self, request):
@@ -106,7 +111,6 @@ class UnsafeSessionAuthentication(SessionAuthentication):
            return None
 
         return (user, None)
-
 
 class UserSearchView(APIView):
 
